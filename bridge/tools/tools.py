@@ -5,6 +5,7 @@ import platform
 import logging
 from .weapon import fire_laser, launch_missile
 #from .voice_control import VoiceControl
+#disabled in this version
 from typing import Callable, List, Optional, Dict, Any
 from dataclasses import dataclass
 
@@ -14,7 +15,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 # --- Tool Functions ---
 def open_notes() -> str:
     """Opens the Notes.txt file, attempting cross-platform compatibility."""
-    notes_path = r"C:\Users\Mert\Desktop\CLEMM\Clemm-0\bridge\tools\Captains_Log.txt"
+    notes_path = "\Clemm-0\bridge\tools\Captains_Log.txt"   #correct path 
     try:
         if platform.system() == 'Windows':
             os.startfile(notes_path)
