@@ -22,9 +22,10 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 
 pip install requests
 
-#for AMD support and linux install change raven.py and this commands. 
+#for AMD support and linux install change raven.py and this commands. for tool implemention change tools.py for prompts change crew.py
 
-run warpcore.py
+#run
+python warp-core.py
 
 
 
