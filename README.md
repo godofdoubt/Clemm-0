@@ -1,4 +1,4 @@
-Basic cybertient framework for with cuda and llamacpp python module to run space ship like roleplay. Agentic AI crews no ready pure python. CLI and UI option.
+Basic cybertient framework for with cuda and llamacpp python module to run space ship like roleplay. Agentic AI crews no ready  framework pure python. CLI and UI option frontend tkinter. Basic option to open,close and ready files for gguf model.
 
 correct env file. and paths for tools.
 
