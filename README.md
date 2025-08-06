@@ -9,10 +9,15 @@ py -3.12 -m venv .rvn #create env
 
 
 python.exe -m pip install --upgrade pip
+
 pip install --upgrade pip setuptools wheel
+
 pip install python-dotenv pydantic
+
 pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu125 --upgrade --force-reinstall --no-cache-dir
+
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+
 pip install requests
 
 #this should work or re
