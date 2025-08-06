@@ -5,7 +5,7 @@ correct env file. and paths for tools.
 #Windows cuda 12.9 
 py -3.12 -m venv .rvn #create env
 
-.\.rvn\Scripts\Activate.ps1 # activate
+.rvn\Scripts\Activate.ps1 # activate
 
 
 python.exe -m pip install --upgrade pip
