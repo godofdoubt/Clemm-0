@@ -1,10 +1,11 @@
 Basic cybertient framework for with cuda and llamacpp python module to run space ship like roleplay. Agentic AI crews no ready pure python. CLI and UI option.
 
 
-env file
-RAVEN_GGUF_MODEL_PATH=models/Q8_0.gguf
-# --- Paths --
+
+
 # Correct path to the GGUF model file.
+#.env in main folder
+RAVEN_GGUF_MODEL_PATH=models/Q8_0.gguf
 WARP_DRIVE_KEY=YourSecureKey
 LLAMACPP_SERVER_EXECUTABLE_PATH=C:/Users/Mert/Desktop/CLEMM/LLAMASERVERCUDA/llama.cpp/build/bin/Release/llama-server.exe
 # Correct server path file.
@@ -15,3 +16,4 @@ SERVER_GPU_LAYERS=34
 CONTEXT_SIZE=1500
 # Number of CPU threads for the direct CUDA backend.
 CPU_THREADS=6
+# --- Paths --
