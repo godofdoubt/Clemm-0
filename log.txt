@@ -10,4 +10,3 @@ pip install python-dotenv pydantic
 pip install llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cu125 --upgrade --force-reinstall --no-cache-dir
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
 pip install requests
-pip install langchain-openai
