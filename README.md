@@ -2,12 +2,13 @@ Basic cybertient framework for with cuda and llamacpp python module to run space
 
 correct env file. and paths for tools.
 
-#Windows cuda 12.9 
+#Windows cuda python 12.9 
+
+#use requirements.txt or ..
 
 py -3.12 -m venv .rvn #create env
 
 .rvn\Scripts\Activate.ps1 # activate
-
 
 python.exe -m pip install --upgrade pip
 
@@ -21,9 +22,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 
 pip install requests
 
-#this should work or re
-
-for linux and not cuda change this commands and  correct raven.py
+#for AMD support and linux install change raven.py and this commands. 
 
 run warpcore.py
 
