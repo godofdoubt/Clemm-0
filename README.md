@@ -1,4 +1,4 @@
- This is a basic **cybernetic framework** that utilizes the **llama-cpp-python** module with **CUDA** support to run a spaceship-themed roleplay. It uses a custom **agentic AI crew** framework, written in pure Python without a pre-built library. The application will offer both a command-line interface (CLI) and a graphical user interface (UI) built with **Tkinter**. It also includes basic functionality to open, close, and prepare files for a **GGUF model**.
+ This is a basic **cybernetic framework** that utilizes the **llama-cpp-python** module with **CUDA** support to run a spaceship-themed roleplay. It uses a custom **agentic AI crew** framework, written in pure Python without a pre-built library. The application will offer both a command-line interface (CLI) and a graphical user interface (UI Matrix Theme) built with **Tkinter**. It also includes basic functionality to open, close, and prepare files for a **GGUF model**.
 
 
 -----
