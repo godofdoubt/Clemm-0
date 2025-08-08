@@ -19,6 +19,7 @@ class Crew(BaseModel):
     repetition_penalty: float = 1.15
     messages: List[Dict[str, str]] = []
     available_tools: List[str] = []
+    crew_registry: Dict[str, Any] = Field(default_factory=dict)
 
     def __init__(self, **data):
         super().__init__(**data)
@@ -81,7 +82,7 @@ class Crew(BaseModel):
 
                     try:
                         print(f"Executing tool: {tool_name} with params: {params}") # Debug print
-                        result = run_tool(tool_name, **params)
+                        result = run_tool(tool_name, crew_instance=self, model=self.model, **params)
                         tool_message = f"Tool '{tool_name}' executed successfully. Result: {result}"
                         self.messages.append({"role": "system", "content": tool_message})
                         # FIX: Add the tool result to the user-facing output
@@ -177,5 +178,9 @@ def initialize_crew(model_obj, max_tokens_console):
         max_tokens=1024,
         temperature=0.9
     )
+
+    # Attach the registry to each crew member so tools can delegate
+    for member in crew.values():
+        member.crew_registry = crew
 
     return crew

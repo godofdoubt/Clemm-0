@@ -3,6 +3,7 @@ import subprocess
 import os
 import platform
 import logging
+import re
 from .weapon import fire_laser, launch_missile
 #from .voice_control import VoiceControl
 #disabled in this version
@@ -57,6 +58,61 @@ def status_log(filename: str) -> str:
     except Exception as e:
         return f"Error reading file: {e}"
 
+def ask_crew(crew_member: str, question: str, context: str = "", *, crew_instance: Any = None, model: Any = None) -> str:
+    """Delegates a question to another crew member and returns their response.
+
+    Accepts either:
+    - crew_instance: an object with attribute 'crew_registry' that is a dict[str, Crew]
+    - crew_instance: a dict[str, Crew] directly (e.g., console passes the crew map)
+    """
+    if crew_instance is None:
+        return "Error: This tool requires a crew instance."
+
+    crew_registry = None
+    if isinstance(crew_instance, dict):
+        crew_registry = crew_instance
+    else:
+        crew_registry = getattr(crew_instance, "crew_registry", None)
+
+    if not isinstance(crew_registry, dict):
+        return "Error: Crew registry not available from the provided crew instance."
+
+    target_key = (crew_member or "").strip()
+    if target_key.lower() == "crew":
+        target_key = "tool_crew"
+
+    if target_key not in crew_registry:
+        available = ", ".join(sorted(crew_registry.keys()))
+        return f"Error: Crew member '{crew_member}' not found. Available: {available}"
+
+    target = crew_registry[target_key]
+
+    try:
+        full_question = question if not context else f"{context}\n\n{question}"
+        delegated_response = target.chat(full_question)
+
+        # If the delegated crew returns a tool command, execute it immediately
+        if isinstance(delegated_response, str):
+            match = re.match(r"^\s*run_tool\s+([a-zA-Z0-9_]+)\s*(.*)$", delegated_response.strip())
+            if match:
+                tool_name = match.group(1).strip()
+                params_str = match.group(2).strip()
+                kwargs: Dict[str, Any] = {}
+                if params_str:
+                    param_pairs = re.findall(r'(\w+)\s*=\s*("([^"]*)"|\'([^\']*)\'|([^,]+))', params_str)
+                    for key, _, q1, q2, unq in param_pairs:
+                        value = q1 if q1 is not None else q2
+                        if value is None:
+                            value = (unq or "").strip()
+                        kwargs[key.strip()] = value
+                result = run_tool(tool_name, crew_instance=crew_instance, model=model, **kwargs)
+                return result
+
+        return delegated_response
+    except Exception as e:
+        logging.exception("Error while delegating to crew member:")
+        return f"Error asking crew member '{target_key}': {e}"
+
 @dataclass
 class Tool:
     description: str
@@ -89,6 +145,12 @@ TOOL_LIST: Dict[str, Tool] = {
         description="Reads the content of a text file from the output directory.",
         function=status_log,
         parameters=["filename"] # <-- ADDED MISSING PARAMETER
+    ),
+    "ask_crew": Tool(
+        description="Delegates a question to another crew member and returns their response.",
+        function=ask_crew,
+        parameters=["crew_member", "question", "context"],
+        crew_dependent=True
     )
     # "mainstream": Tool(
     #    description="Launches the Streamlit interface.",
