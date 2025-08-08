@@ -59,3 +59,8 @@ Here's a refined version of the installation steps:
     ```
 
 **Important Note:** The CUDA version for `llama-cpp-python` (`cu125`) and PyTorch (`cu128`) are different. While this might work, it's generally best practice to ensure your CUDA dependencies are aligned to avoid unexpected issues. Check if there is a `llama-cpp-python` wheel available for `cu128` to maintain consistency.
+
+-----
+
+### Documentation
+- Full API and usage docs are available in `docs/index.md`.
